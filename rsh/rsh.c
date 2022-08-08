@@ -88,6 +88,11 @@ void	sendsig(int);
 void	talk(int, int, long, pid_t, int, int);
 void	usage(void);
 
+#ifndef PREFIX
+#define PREFIX		"/usr/local"
+#endif
+#define PATH_RLOGIN	PREFIX"/bin/rlogin"
+
 int
 main(int argc, char *argv[])
 {
@@ -167,8 +172,8 @@ main(int argc, char *argv[])
 	if (!argv[optind]) {
 		if (asrsh)
 			*argv = rlogin;
-		execv(_PATH_RLOGIN, argv);
-		err(1, "can't exec %s", _PATH_RLOGIN);
+		execv(PATH_RLOGIN, argv);
+		err(1, "can't exec %s", PATH_RLOGIN);
 	}
 
 	argc -= optind;

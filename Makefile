@@ -3,9 +3,6 @@ SUBDIR=	rcp \
 	rlogind \
 	rsh \
 	rshd \
-	ruptime \
-	rwho \
-	rwhod
 
 SUBDIR_ORDERED=
 

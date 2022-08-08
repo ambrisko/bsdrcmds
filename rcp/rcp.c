@@ -100,6 +100,11 @@ void	 tolocal(int, char *[]);
 void	 toremote(char *, int, char *[]);
 void	 usage(void);
 
+#ifndef PREFIX
+#define PREFIX		"/usr/local"
+#endif
+#define PATH_RSH	PREFIX"/bin/rlogin"
+
 int
 main(int argc, char *argv[])
 {
@@ -246,14 +251,14 @@ toremote(char *targ, int argc, char *argv[])
 				}
 				if (asprintf(&bp, 
 				    "%s %s -l %s -n %s %s '%s%s%s:%s'",
-				    _PATH_RSH, host, suser, cmd, src,
+				    PATH_RSH, host, suser, cmd, src,
 				    tuser ? tuser : "", tuser ? "@" : "",
 				    thost, targ) == -1)
 					err(1, "asprintf");
 			} else
 				if (asprintf(&bp,
 				    "exec %s %s -n %s %s '%s%s%s:%s'",
-				    _PATH_RSH, argv[i], cmd, src,
+				    PATH_RSH, argv[i], cmd, src,
 				    tuser ? tuser : "", tuser ? "@" : "",
 				    thost, targ) == -1)
 					err(1, "asprintf");
